@@ -22,28 +22,27 @@ function BrandFrom() {
 
   const addBrand = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post("/products/brand/addBrand", {
+        brandName: brandName,
+        category: selectedCategory,
+      });
+      if (response.data.message === "ok") {
+        setMessage("Successfully added brand");
+        setErrMsg("");
+        setBrandName("")
+      }
+    } catch (err) {
+      setErrMsg("Brand already exists.");
+      console.error(err.message);
+      setMessage("");
+      setBrandName("");
+    }
 
-    //     const { categoryName } = data;
-    //     try {
-    //       const response = await axios.post("/products/category/addCategory", {
-    //         categoryName,
-    //       });
-    //       if (response.data.message === "ok") {
-    //         setMessage("Successfully added category.");
-    //         setErrMsg(""); // Clear any previous error message
-    //         setData({ categoryName: "" });
-    //       }
-    //     } catch (err) {
-    //       setErrMsg("Category already exists.");
-    //       setMessage(""); // Clear any previous success message
-    //       console.error(err.message);
-    //       setData({ categoryName: "" });
-    //     }
-    //   };
   };
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
-      <Link to={"/category"}>
+      <Link to={"/brand"}>
         <FaArrowLeft size={30} className="mx-3" style={{ cursor: "pointer" }} />
       </Link>
       <div className="form-container">
@@ -74,6 +73,7 @@ function BrandFrom() {
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
+               <option value="" disabled>Select a category</option>
               {categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.categoryName}

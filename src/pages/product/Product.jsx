@@ -3,7 +3,7 @@ import axios from "axios";
 import { useTable } from "react-table";
 import { Link } from "react-router-dom";
 
-function Brand() {
+function Product() {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
@@ -12,25 +12,22 @@ function Brand() {
   const fetchCategories = async () => {
     try {
       const response = await axios
-        .get("/products/brand/getBrand")
-        .then((response) => {
-          const activeCategories = response.data.filter(
-            (item) => item.isActive === true
-          );
-          // console.log(activeCategories)
+        .get("/products/getAllDetails")
+    
+        const mappedData=response.data.map(item=>({
+          ...item,
+          'first_name':item.productName,
+          "category_Name":item.brandId.category.categoryName,
+          "count":item.item_count,
+          "Brand_Name":item.brandId.brandName
+         
+        }))
 
-          const mappedData = activeCategories.map((item) => ({
-            ...item,
-            first_name: item.brandName,
-            category_name:item.category.categoryName
-          }));
+        setCategories(mappedData)
+        
+      
+        
 
-          setCategories(mappedData);
-        })
-        .catch((error) => {
-          console.error("Error fetching categories:", error);
-          setError(error);
-        });
     } catch (error) {
       console.error("Error fetching categories:", error);
       setError(error);
@@ -51,12 +48,45 @@ function Brand() {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Brand Name",
+        Header: "Product Name",
         accessor: "first_name", // Adjust according to your data
       },
       {
+        Header: "Price($)",
+        accessor: "price", // Adjust according to your data
+      },
+      {
+        Header: "item_count",
+        accessor: "count", // Adjust according to your data
+      },
+      {
+        Header: "color",
+        accessor: "color", // Adjust according to your data
+      },
+      {
+        Header: "size",
+        accessor: "size", // Adjust according to your data
+      },
+      {
         Header: "Category Name",
-        accessor: "category_name", // Adjust according to your data
+        accessor: "category_Name", // Adjust according to your data
+      },
+      {
+        Header: "Brand Name",
+        accessor: "Brand_Name", // Adjust according to your data
+      },
+      {
+        Header: "view",
+        Cell: ({ row }) => (
+          <button
+            className="btn btn-success"
+            
+            // Use the correct property for ID
+          >
+            <Link to={`/uploadImage/${row.original._id}`} style={{textDecoration:'none',color:'white'}}>view</Link>
+          </button>
+        ),
+        id: "view",
       },
       {
         Header: "Edit",
@@ -93,9 +123,9 @@ function Brand() {
 
   return (
     <div className="main-container">
-      <Link to={"/brandForm"}>
+      <Link to={"/productForm"}>
         <button className="btn btn-primary category-btn m-4">
-          Add Brand +
+          Add Product +
         </button>
       </Link>
       <table {...getTableProps()} className="mx-4">
@@ -125,4 +155,6 @@ function Brand() {
   );
 }
 
-export default Brand;
+
+
+export default Product

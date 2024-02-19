@@ -8,6 +8,9 @@ import CategoryFrom from "./pages/category/CategoryFrom";
 import axios from "axios";
 import Brand from "./pages/brand/Brand";
 import BrandFrom from "./pages/brand/BrandFrom";
+import Product from "./pages/product/Product";
+import ProductForm from "./pages/product/ProductForm";
+import ViewUplodaImage from "./pages/product/ViewUplodaImage";
 
 
 axios.defaults.baseURL="http://localhost:5000";
@@ -34,6 +37,9 @@ function App() {
         <Route path="/categoryForm" element={<CategoryFrom/>}/>
         <Route path="/brand" element={<Brand/>}/>
         <Route path="/brandForm" element={<BrandFrom/>}/>
+        <Route path="/product" element={<Product/>}/>
+        <Route path="/productForm" element={<ProductForm/>}/>
+        <Route path="/uploadImage/:id" element={<ViewUplodaImage/>}/>
 
 
       </Routes>

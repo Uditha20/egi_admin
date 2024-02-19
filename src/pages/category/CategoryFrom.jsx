@@ -23,6 +23,7 @@ function CategoryForm() {
         setMessage("Successfully added category.");
         setErrMsg(""); // Clear any previous error message
         setData({ categoryName: "" });
+        
       }
     } catch (err) {
       setErrMsg("Category already exists.");

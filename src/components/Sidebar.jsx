@@ -1,7 +1,7 @@
 import React from 'react'
 import 
 {BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
-  BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
+  BsListCheck, BsMenuButtonWideFill, BsFillGearFill,BsBagFill}
  from 'react-icons/bs'
 
 function Sidebar({openSidebarToggle, OpenSidebar}) {
@@ -31,8 +31,8 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </a>
             </li>
             <li className='sidebar-list-item'>
-                <a href="#">
-                    <BsFillArchiveFill className='icon'/> Products
+                <a href="/product">
+                    <BsBagFill className='icon'/> Products
                 </a>
             </li>
           
