@@ -13,23 +13,23 @@ function Product() {
     try {
       const response = await axios
         .get("/products/getAllDetails")
-    
-        const mappedData=response.data.map(item=>({
-          ...item,
-          'first_name':item.productName,
-          "category_Name":item.brandId.category.categoryName,
-          "count":item.item_count,
-          "Brand_Name":item.brandId.brandName
-         
-        }))
+        .then((response) => {
+          const activeCategories = response.data.filter(
+            (item) => item.isActive === true
+          );
 
-        setCategories(mappedData)
-        
-      
-        
+          const mappedData = activeCategories.map((item) => ({
+            ...item,
+            first_name: item.productName,
+            category_Name: item.brandId.category.categoryName,
+            count: item.item_count,
+            Brand_Name: item.brandId.brandName,
+          }));
 
+          setCategories(mappedData);
+        });
     } catch (error) {
-      console.error("Error fetching categories:", error);
+     window.location.href = "http://localhost:3000/";
       setError(error);
     }
   };
@@ -38,8 +38,10 @@ function Product() {
     fetchCategories();
   }, [updateTrigger]);
 
+
+
   const handleUpdate = async (id) => {
-    const updateColumn = await axios.post(`/products/category/delete/${id}`);
+    const updateColumn = await axios.post(`/products/productDelete/${id}`);
     if (updateColumn.data.message === "ok") {
       alert("Delete Complete");
       setUpdateTrigger((prev) => !prev);
@@ -80,10 +82,15 @@ function Product() {
         Cell: ({ row }) => (
           <button
             className="btn btn-success"
-            
-            // Use the correct property for ID
+
+           
           >
-            <Link to={`/uploadImage/${row.original._id}`} style={{textDecoration:'none',color:'white'}}>view</Link>
+            <Link
+              to={`/uploadImage/${row.original._id}`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              view
+            </Link>
           </button>
         ),
         id: "view",
@@ -155,6 +162,4 @@ function Product() {
   );
 }
 
-
-
-export default Product
+export default Product;

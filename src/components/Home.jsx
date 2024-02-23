@@ -1,13 +1,17 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
  from 'react-icons/bs'
  import 
  { BarChart, Bar,XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
+ import { ClipLoader } from 'react-spinners';
 
 function Home() {
-
+  
+  
     const data = [
         {
           name: 'Page A',
@@ -52,6 +56,8 @@ function Home() {
           amt: 2100,
         },
       ];
+
+
      
 
   return (
@@ -114,7 +120,7 @@ function Home() {
                 </BarChart>
             </ResponsiveContainer>
 
-            {/* <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                 width={500}
                 height={300}
@@ -134,7 +140,7 @@ function Home() {
                 <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
                 <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                 </LineChart>
-            </ResponsiveContainer> */}
+            </ResponsiveContainer>
 
         </div>
     </main>

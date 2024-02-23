@@ -26,10 +26,11 @@ function Category() {
           setCategories(mappedData);
         })
         .catch((error) => {
-          console.error("Error fetching categories:", error);
+        
           setError(error);
         });
     } catch (error) {
+   
       console.error("Error fetching categories:", error);
       setError(error);
     }

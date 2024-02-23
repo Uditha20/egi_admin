@@ -16,7 +16,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
 
         <ul className='sidebar-list'>
             <li className='sidebar-list-item'>
-                <a href="#">
+                <a href="/">
                     <BsGrid1X2Fill className='icon'/> Dashboard
                 </a>
             </li>
@@ -37,7 +37,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
             </li>
           
             <li className='sidebar-list-item'>
-                <a href="#">
+                <a href="/customerDetails">
                     <BsPeopleFill className='icon'/> Customers
                 </a>
             </li>

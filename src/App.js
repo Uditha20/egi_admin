@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AuthProvider } from "./auth/userContext";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Home from "./components/Home";
@@ -11,10 +12,10 @@ import BrandFrom from "./pages/brand/BrandFrom";
 import Product from "./pages/product/Product";
 import ProductForm from "./pages/product/ProductForm";
 import ViewUplodaImage from "./pages/product/ViewUplodaImage";
+import CustomerDetail from "./pages/customer/CustomerDetail";
 
-
-axios.defaults.baseURL="http://localhost:5000";
-axios.defaults.withCredentials=true;
+axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.withCredentials = true;
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
@@ -24,28 +25,27 @@ function App() {
   };
   return (
     <>
-    <div className="grid-container">
-      <Header OpenSidebar={OpenSidebar} />
-      <Sidebar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
-      />
-    
-      <Routes>
-        <Route  path="/" element={<Home />} />
-        <Route path="/category" element={<Category/>}/>
-        <Route path="/categoryForm" element={<CategoryFrom/>}/>
-        <Route path="/brand" element={<Brand/>}/>
-        <Route path="/brandForm" element={<BrandFrom/>}/>
-        <Route path="/product" element={<Product/>}/>
-        <Route path="/productForm" element={<ProductForm/>}/>
-        <Route path="/uploadImage/:id" element={<ViewUplodaImage/>}/>
-
-
-      </Routes>
-    </div>
+      <AuthProvider>
+        <div className="grid-container">
+          <Header OpenSidebar={OpenSidebar} />
+          <Sidebar
+            openSidebarToggle={openSidebarToggle}
+            OpenSidebar={OpenSidebar}
+          />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/categoryForm" element={<CategoryFrom />} />
+            <Route path="/brand" element={<Brand />} />
+            <Route path="/brandForm" element={<BrandFrom />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/productForm" element={<ProductForm />} />
+            <Route path="/uploadImage/:id" element={<ViewUplodaImage />} />
+            <Route path="/customerDetails" element={<CustomerDetail />} />
+          </Routes>
+        </div>
+      </AuthProvider>
     </>
-    
   );
 }
 
