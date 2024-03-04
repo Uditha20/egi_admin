@@ -50,6 +50,11 @@ function Product() {
   const columns = React.useMemo(
     () => [
       {
+        Header: "No",
+        accessor: "serial",
+        Cell: ({ row }) => row.index + 1, // This will start counting from 1
+      },
+      {
         Header: "Product Name",
         accessor: "first_name", // Adjust according to your data
       },

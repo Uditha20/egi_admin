@@ -13,6 +13,9 @@ import Product from "./pages/product/Product";
 import ProductForm from "./pages/product/ProductForm";
 import ViewUplodaImage from "./pages/product/ViewUplodaImage";
 import CustomerDetail from "./pages/customer/CustomerDetail";
+import Order from "./pages/order/Order";
+import BillDetails from "./pages/order/BillDetails";
+import ProductDetails from "./pages/order/ProductDetails";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -42,6 +45,10 @@ function App() {
             <Route path="/productForm" element={<ProductForm />} />
             <Route path="/uploadImage/:id" element={<ViewUplodaImage />} />
             <Route path="/customerDetails" element={<CustomerDetail />} />
+            <Route path="/order" element={<Order/>}/>
+            <Route path="/order/billDetails/:id" element={<BillDetails/>}/>
+            <Route path="/order/ProductDetails/:id" element={<ProductDetails/>}/>
+
           </Routes>
         </div>
       </AuthProvider>
