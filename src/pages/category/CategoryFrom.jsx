@@ -2,28 +2,37 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Category from "./Category";
 
-function CategoryForm() {
+function CategoryForm({ existingCategory, clearEditing }) {
   const [data, setData] = useState({
-    categoryName: "",
+    categoryName: existingCategory ? existingCategory.categoryName : "",
   });
-
   const [message, setMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   const addCategory = async (e) => {
     e.preventDefault();
 
-    const { categoryName } = data;
     try {
-      const response = await axios.post("/products/category/addCategory", {
-        categoryName,
-      });
+      let response;
+      if (existingCategory) {
+        // Update existing category
+        response = await axios.put(
+          `/products/category/edit/${existingCategory._id}`,
+          data
+        );
+        window.location.href="http://localhost:3001/category" 
+        clearEditing();
+
+      } else {
+        // Add new category
+        response = await axios.post("/products/category/addCategory", data);
+      }
+
       if (response.data.message === "ok") {
-        setMessage("Successfully added category.");
-        setErrMsg(""); // Clear any previous error message
+        setMessage("Successfully processed category.");
         setData({ categoryName: "" });
-        
       }
     } catch (err) {
       setErrMsg("Category already exists.");
@@ -31,11 +40,21 @@ function CategoryForm() {
       console.error(err.message);
       setData({ categoryName: "" });
     }
+    
   };
-
+  console.log(data);
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
-      <Link to={"/category"}><FaArrowLeft size={30} className="mx-3"style={{cursor:"pointer"}}/></Link>
+      {!existingCategory ? (
+        <Link to={"/category"}>
+          <FaArrowLeft
+            size={30}
+            className="mx-3"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
+      ) : null}
+
       <div className="form-container">
         <form method="POST" onSubmit={addCategory}>
           {/* Success message */}

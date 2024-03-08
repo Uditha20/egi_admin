@@ -3,12 +3,17 @@ import React, { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function BrandFrom() {
+function BrandFrom({ existingBrand, clearEditing }) {
+  console.log(existingBrand);
   const [message, setMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [brandName, setBrandName] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState({
+    category: existingBrand ? existingBrand.category._id : "",
+  });
+  const [brandName, setBrandName] = useState({
+    brandName: existingBrand ? existingBrand.brandName : "",
+  });
   useEffect(() => {
     axios
       .get("/products/category/getAllCategory")
@@ -23,14 +28,27 @@ function BrandFrom() {
   const addBrand = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/products/brand/addBrand", {
-        brandName: brandName,
-        category: selectedCategory,
-      });
+      let response;
+      if (existingBrand) {
+        response = await axios.put(
+          `/products/brand/editBrand/${existingBrand._id}`,
+          {
+            brandName: brandName,
+            category: selectedCategory,
+          }
+        );
+        window.location.href = "http://localhost:3001/brand";
+        clearEditing();
+      } else {
+        response = await axios.post("/products/brand/addBrand", {
+          brandName: brandName,
+          category: selectedCategory,
+        });
+      }
       if (response.data.message === "ok") {
         setMessage("Successfully added brand");
         setErrMsg("");
-        setBrandName("")
+        setBrandName("");
       }
     } catch (err) {
       setErrMsg("Brand already exists.");
@@ -38,8 +56,8 @@ function BrandFrom() {
       setMessage("");
       setBrandName("");
     }
-
   };
+  console.log(existingBrand);
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
       <Link to={"/brand"}>
@@ -60,7 +78,7 @@ function BrandFrom() {
               className="form-control pt-2 mt-2"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              value={brandName}
+              value={brandName.brandName}
               //   value={data.brandName}
               placeholder="Ex: LG"
               onChange={(e) => setBrandName(e.target.value)}
@@ -73,12 +91,16 @@ function BrandFrom() {
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
-               <option value="" disabled>Select a category</option>
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.categoryName}
-                </option>
-              ))}
+              <option value="" disabled>
+                Select a category
+              </option>
+              {categories
+                .filter((category) => category.isActive)
+                .map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.categoryName}
+                  </option>
+                ))}
             </select>
           </div>
 

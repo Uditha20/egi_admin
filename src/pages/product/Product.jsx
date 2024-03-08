@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTable } from "react-table";
 import { Link } from "react-router-dom";
+import ProductForm from "./ProductForm";
 
 function Product() {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
   const [updateTrigger, setUpdateTrigger] = useState(false);
+  const [editProduct, setEditProduct] = useState(null);
 
   const fetchCategories = async () => {
     try {
@@ -105,7 +107,7 @@ function Product() {
         Cell: ({ row }) => (
           <button
             className="btn btn-primary"
-            onClick={() => handleUpdate(row.original._id)} // Use the correct property for ID
+            onClick={()=>setEditProduct(row.original)} // Use the correct property for ID
           >
             Edit
           </button>
@@ -135,34 +137,45 @@ function Product() {
 
   return (
     <div className="main-container">
-      <Link to={"/productForm"}>
-        <button className="btn btn-primary category-btn m-4">
-          Add Product +
-        </button>
-      </Link>
-      <table {...getTableProps()} className="mx-4">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+      {
+        editProduct?(
+         <ProductForm existProduct={editProduct}
+         clearEditing={() => setEditProduct(null)}
+         />
+        ):(
+          <div>
+          <Link to={"/productForm"}>
+          <button className="btn btn-primary category-btn m-4">
+            Add Product +
+          </button>
+        </Link>
+        <table {...getTableProps()} className="mx-4">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+          </div>
+        )
+      }
+     
     </div>
   );
 }
