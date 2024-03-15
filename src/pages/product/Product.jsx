@@ -31,7 +31,7 @@ function Product() {
           setCategories(mappedData);
         });
     } catch (error) {
-     window.location.href = "http://localhost:3000/";
+     window.location.href = process.env.REACT_APP_MAIN_URL
       setError(error);
     }
   };

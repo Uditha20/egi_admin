@@ -13,7 +13,7 @@ const logout = async () => {
     const logOut = await axios.get("/user/logout");
     if (logOut.data) {
       // console.log(logOut.data.message);
-      window.location.href = "http://localhost:3000/"
+      window.location.href = process.env.REACT_APP_MAIN_URL
     }
   } catch (err) {
     console.log(err.message);

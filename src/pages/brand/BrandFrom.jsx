@@ -37,7 +37,7 @@ function BrandFrom({ existingBrand, clearEditing }) {
             category: selectedCategory,
           }
         );
-        window.location.href = "http://localhost:3001/brand";
+        window.location.href = `${process.env.REACT_APP_DASH_URL}/brand`;
         clearEditing();
       } else {
         response = await axios.post("/products/brand/addBrand", {

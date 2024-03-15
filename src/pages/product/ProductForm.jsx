@@ -97,7 +97,7 @@ for (let pair of formData.entries()) {
             },
           }
         );
-        window.location.href = "http://localhost:3001/product";
+        window.location.href = `${process.env.REACT_APP_DASH_URL}/product`;
         clearEditing();
         console.log(response.data)
         

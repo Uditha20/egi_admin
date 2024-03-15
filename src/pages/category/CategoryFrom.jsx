@@ -22,7 +22,7 @@ function CategoryForm({ existingCategory, clearEditing }) {
           `/products/category/edit/${existingCategory._id}`,
           data
         );
-        window.location.href="http://localhost:3001/category" 
+        window.location.href=`${process.env.REACT_APP_DASH_URL}/category` 
         clearEditing();
 
       } else {

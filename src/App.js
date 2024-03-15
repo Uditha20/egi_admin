@@ -17,7 +17,7 @@ import Order from "./pages/order/Order";
 import BillDetails from "./pages/order/BillDetails";
 import ProductDetails from "./pages/order/ProductDetails";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
 function App() {

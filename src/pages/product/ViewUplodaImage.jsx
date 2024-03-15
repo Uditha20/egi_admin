@@ -30,7 +30,7 @@ function ViewUplodaImage() {
           {product && (
             <>
               <img
-                src={`http://localhost:5000/uploads/${product.mainImage
+                src={`${process.env.REACT_APP_API_URL}/uploads/${product.mainImage
                   .split("\\")
                   .pop()}`}
                 alt={product.productName}
@@ -47,7 +47,7 @@ function ViewUplodaImage() {
             <div className="col-lg-3  mx-5">
               <img
                 key={index}
-                src={`http://localhost:5000/uploads/${image.split("\\").pop()}`}
+                src={`${process.env.REACT_APP_API_URL}/uploads/${image.split("\\").pop()}`}
                 alt={`Additional Image ${index + 1}`}
                 style={{ height: "220px", width: "250px" }}
               />
