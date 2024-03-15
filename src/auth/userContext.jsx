@@ -17,11 +17,11 @@ export const AuthProvider = ({ children }) => {
                     setUser(response.data.user);
                 } else {
                     setUser(null);
-                    window.location.href = "http://localhost:3000/"
+                    window.location.href = process.env.REACT_APP_MAIN_URL
                 }
             } catch (error) {
                 setUser(null);
-                window.location.href = "http://localhost:3000/"
+                window.location.href = process.env.REACT_APP_MAIN_URL
             } finally {
                 setIsLoading(false);
             }
