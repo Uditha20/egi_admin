@@ -16,7 +16,13 @@ function ViewUplodaImage() {
         console.log(err);
       });
   }, [id]);
-  console.log(product);
+  const getPath = (pic) => {
+    const separator = pic.includes("\\") ? "\\" : "/";
+    return `${process.env.REACT_APP_API_URL}/uploads/${pic
+      .split(separator)
+      .pop()}`;
+  };
+  // console.log(product);
 
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
@@ -30,9 +36,7 @@ function ViewUplodaImage() {
           {product && (
             <>
               <img
-                src={`${process.env.REACT_APP_API_URL}/uploads/${product.mainImage
-                  .split("\\")
-                  .pop()}`}
+                src={`${process.env.REACT_APP_API_URL}/uploads/${product.mainImage.split(product.mainImage.includes("\\") ? "\\" : "/").pop()}`}
                 alt={product.productName}
                 style={{ height: "250px" }}
               />
@@ -46,11 +50,10 @@ function ViewUplodaImage() {
           product.additionalImages.map((image, index) => (
             <div className="col-lg-3  mx-5">
               <img
-                key={index}
-                src={`${process.env.REACT_APP_API_URL}/uploads/${image.split("\\").pop()}`}
-                alt={`Additional Image ${index + 1}`}
-                style={{ height: "220px", width: "250px" }}
-              />
+                      src={getPath(image)}
+                      alt={`Additional Image ${index}`}
+                      className="img-fluid"
+                    />
             </div>
           ))}
       </div>
