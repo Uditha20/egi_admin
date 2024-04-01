@@ -9,6 +9,8 @@ function ProductForm({ existProduct, clearEditing }) {
   const initialCount = existProduct ? existProduct.item_count : 0;
   const initialColor = existProduct ? existProduct.color : "";
   const initialSize = existProduct ? existProduct.size : "";
+  const initialDescription = existProduct ? existProduct.description : "";
+  const initialWeight = existProduct ? existProduct.weight : "";
   const initialSelectedCategory =
     existProduct && existProduct.categoryId
       ? existProduct.categoryId 
@@ -30,6 +32,8 @@ function ProductForm({ existProduct, clearEditing }) {
   const [count, setCount] = useState(initialCount);
   const [color, setColor] = useState(initialColor);
   const [size, SetSize] = useState(initialSize);
+  const [description, setDescription] = useState(initialDescription);
+  const [weight, setWeight] = useState(initialWeight);
   const [selectedCategory, setSelectedCategory] = useState(
     initialSelectedCategory
   );
@@ -75,6 +79,8 @@ function ProductForm({ existProduct, clearEditing }) {
     formData.append("size", size);
     formData.append("categoryId", selectedCategory);
     formData.append("brandId", selectBrand);
+    formData.append("description", description);
+    formData.append("weight", weight);
     if (mainImage) {
       formData.append("mainImage", mainImage);
     }
@@ -123,6 +129,8 @@ for (let pair of formData.entries()) {
         setSelectBrand("");
         setMainImage(null);
         setAdditionalImages([]);
+        setDescription("");
+        setWeight("");
       }
     } catch (err) {
       setErrMsg("Can't add product");
@@ -183,6 +191,31 @@ for (let pair of formData.entries()) {
               //   value={data.brandName}
               placeholder="Ex: 5"
               onChange={(e) => setCount(e.target.value)}
+            />
+          </div>
+          <div className="form-group pb-3">
+            <label htmlFor="example">Product discription</label>
+            <input
+              type="text"
+              className="form-control pt-2 mt-2"
+              id="example"
+              aria-describedby="elHelp"
+              value={description}
+        
+            
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div> <div className="form-group pb-3">
+            <label htmlFor="exampleInputEmail1">Product weight</label>
+            <input
+              type="text"
+              className="form-control pt-2 mt-2"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              value={weight}
+              //   value={data.brandName}
+              placeholder="The weight of the product in grams"
+             onChange={(e) => setWeight(e.target.value)}
             />
           </div>
           <div className="form-group pb-3">
