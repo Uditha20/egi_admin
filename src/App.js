@@ -16,6 +16,7 @@ import CustomerDetail from "./pages/customer/CustomerDetail";
 import Order from "./pages/order/Order";
 import BillDetails from "./pages/order/BillDetails";
 import ProductDetails from "./pages/order/ProductDetails";
+import AgentFrom from "./pages/agent/AgentFrom";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
@@ -48,6 +49,7 @@ function App() {
             <Route path="/order" element={<Order/>}/>
             <Route path="/order/billDetails/:id" element={<BillDetails/>}/>
             <Route path="/order/ProductDetails/:id" element={<ProductDetails/>}/>
+            <Route path="/employee" element={<AgentFrom />} /> 
 
           </Routes>
         </div>

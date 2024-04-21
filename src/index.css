@@ -282,3 +282,11 @@ tbody td:hover:before {
 .form-container input[type="text"] {
   width: 400px; /* Replace with your desired width */
 }
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This sets the height of the container to full viewport height */
+}

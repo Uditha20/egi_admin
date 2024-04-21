@@ -56,6 +56,11 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     <BsFillGearFill className='icon'/> Setting
                 </a>
             </li>
+            <li className='sidebar-list-item'>
+                <a href="/employee">
+                <BsPeopleFill className='icon'/> Employee
+                </a>
+            </li>
         </ul>
     </aside>
   )
