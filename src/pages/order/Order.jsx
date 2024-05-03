@@ -32,7 +32,7 @@ function Order() {
     fetchOrder();
   }, [updateTrigger]);
 
-  console.log(order);
+  // console.log(order);
 
   const columns = React.useMemo(
     () => [

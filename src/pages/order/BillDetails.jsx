@@ -22,7 +22,7 @@ function BillDetails() {
     fetchOrder();
   }, [updateTrigger]);
 
-  console.log(details);
+  // console.log(details);
   return (
     <div className="m-5">
       <h3>Bill Info:</h3>

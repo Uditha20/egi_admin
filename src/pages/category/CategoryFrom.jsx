@@ -42,7 +42,7 @@ function CategoryForm({ existingCategory, clearEditing }) {
     }
     
   };
-  console.log(data);
+  // console.log(data);
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
       {!existingCategory ? (

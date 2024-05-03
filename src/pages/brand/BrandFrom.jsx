@@ -57,7 +57,7 @@ function BrandFrom({ existingBrand, clearEditing }) {
       setBrandName("");
     }
   };
-  console.log(existingBrand);
+  // console.log(existingBrand);
   return (
     <div className="main pt-3" style={{ gridArea: "main" }}>
       <Link to={"/brand"}>

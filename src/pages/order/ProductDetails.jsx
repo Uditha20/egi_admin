@@ -22,7 +22,7 @@ function ProductDetails() {
     fetchOrder();
   }, [updateTrigger]);
 
-  console.log(details);
+  // console.log(details);
   return (
     <div className="m-5">
       <h3>ProductDetails</h3>

@@ -87,7 +87,7 @@ function ProductForm({ existProduct, clearEditing }) {
     additionalImages.forEach((image) => {
       formData.append("additionalImages", image);
     });
-console.log(formData)
+// console.log(formData)
 for (let pair of formData.entries()) {
   console.log(`${pair[0]}: ${pair[1]}`);
 }
@@ -139,9 +139,9 @@ for (let pair of formData.entries()) {
     }
   };
 
-  console.log(selectBrand);
-  console.log(selectedCategory)
-  console.log(brandName)
+  // console.log(selectBrand);
+  // console.log(selectedCategory)
+  // console.log(brandName)
  
  
 
