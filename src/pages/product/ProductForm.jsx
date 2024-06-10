@@ -103,7 +103,7 @@ for (let pair of formData.entries()) {
             },
           }
         );
-        window.location.href = `${process.env.REACT_APP_DASH_URL}/product`;
+        window.location.href = `${process.env.REACT_APP_DASH_URL}product`;
         clearEditing();
         console.log(response.data)
         
@@ -249,7 +249,7 @@ for (let pair of formData.entries()) {
             <select
               class="form-select"
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={(e) => setSelectedCategory(e.target.value)} required
             >
               <option value="" disabled>
                 Select a category
@@ -266,7 +266,7 @@ for (let pair of formData.entries()) {
             <select
               className="form-select"
               value={selectBrand}
-              onChange={(e) => setSelectBrand(e.target.value)}
+              onChange={(e) => setSelectBrand(e.target.value)} required
             >
               <option value="" disabled>
                 Select a brand

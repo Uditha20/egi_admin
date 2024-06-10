@@ -26,6 +26,7 @@ function Product() {
             category_Name: item.brandId.category.categoryName,
             count: item.item_count,
             Brand_Name: item.brandId.brandName,
+            weight:item.weight
           }));
 
           setCategories(mappedData);
@@ -71,6 +72,10 @@ function Product() {
       {
         Header: "color",
         accessor: "color", // Adjust according to your data
+      },
+      {
+        Header: "weight",
+        accessor: "weight", // Adjust according to your data
       },
       {
         Header: "size",
