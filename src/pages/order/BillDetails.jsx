@@ -33,7 +33,7 @@ function BillDetails() {
         <div className="m-3">
           {details.map((billDetails, index) => (
             <div>
-              <p key={index}>
+              <p key={billDetails.phoneNo}>
                Name:<b>{billDetails.name}</b>
               </p>
               <p>
