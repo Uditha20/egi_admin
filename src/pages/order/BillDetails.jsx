@@ -48,6 +48,9 @@ function BillDetails() {
               <p>
                  E-mail:<b>{billDetails.email}</b>
               </p>
+              <p>
+              DeliveryOption:<b>{billDetails.deliveryOption}</b>
+              </p>
             
               <hr />
             </div>
